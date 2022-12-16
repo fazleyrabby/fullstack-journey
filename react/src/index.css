@@ -127,6 +127,12 @@ table > tbody > tr > td {
     margin-bottom: 1rem;
 }
 
+.alert-inline{
+    color: red;
+    font-size: 12px;
+    margin: -5px 0 10px 0;
+}
+
 .notification {
     position: fixed;
     right: 1rem;
