@@ -59,8 +59,10 @@ input:focus {
 .btn-sm{
     padding: 8px;
 }
-.btn-sm.active{
+.btn-sm.active,
+.btn-sm.disabled{
     opacity: 0.8;
+    pointer-events: none;
 }
 .btn-add,
 .btn-edit,
