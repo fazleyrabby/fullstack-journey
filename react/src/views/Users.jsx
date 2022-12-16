@@ -18,6 +18,8 @@ export default function Users() {
     setLinks(payload.meta)
   }
 
+  const onLoading = (loading) => setLoading(loading)
+
   const getUsers = () => {
     setLoading(true);
     axiosClient.get('/users')
@@ -85,7 +87,7 @@ export default function Users() {
           }
         </table>
         <br></br>
-        <Pagination links={links} callback={callback}/>
+        <Pagination links={links} callback={callback} loading={onLoading}/>
       </div>
     </div>
   )

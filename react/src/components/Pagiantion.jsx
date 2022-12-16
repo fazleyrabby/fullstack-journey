@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 import axiosClient from '../axios-client.js';
 
 
-export default function Pagination({ links, callback }) {
+export default function Pagination({ links, callback,loading }) {
     const getClassName = (active) => (active ? "btn btn-sm active" : "btn btn-sm")
 
     const handleCallback = (url) => {
+        loading(true)
         axiosClient.get(url)
             .then(({ data }) => {
                 callback(data)
+                loading(false)
+            }).catch(() => {
+                loading(false)
             })
     }
 
