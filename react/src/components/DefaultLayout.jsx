@@ -4,8 +4,9 @@ import axiosClient from "../axios-client";
 import { useStateContext } from "../contexts/ContextProvider";
 
 export default function DefaultLayout() {
-  const { user, token, setUser, setToken } = useStateContext()
-  
+  const { user, token, setUser, setToken, notification } = useStateContext()
+
+
   if (!token) {
     return <Navigate to="/login" />
   }
@@ -14,18 +15,18 @@ export default function DefaultLayout() {
     ev.preventDefault()
 
     axiosClient.post('/logout')
-    .then(() => {
-      setUser({})
-      setToken(null)
-    })
+      .then(() => {
+        setUser({})
+        setToken(null)
+      })
   }
 
   useEffect(() => {
     axiosClient.get('/user')
-    .then(({data})=> {
-      setUser(data)
-    })
-  },[]);
+      .then(({ data }) => {
+        setUser(data)
+      })
+  }, []);
 
   return (
     <div id="defaultLayout">
@@ -47,7 +48,13 @@ export default function DefaultLayout() {
           <Outlet />
         </main>
       </div>
-      
+
+      {notification &&
+        <div className="notification">
+          {notification}
+        </div>
+      }
+
     </div>
   )
 }
