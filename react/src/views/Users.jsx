@@ -9,6 +9,7 @@ export default function Users() {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(false);
   const {setNotification} = useStateContext();
+  const { authUser } = useStateContext()
 
   useEffect(() => {
     getUsers();
@@ -42,6 +43,9 @@ export default function Users() {
       .then(() => {
         setNotification('User deleted successfully!')
         getUsers()
+      })
+      .catch(({response}) => {
+        setNotification(response.data)
       })
   }
 
@@ -80,7 +84,9 @@ export default function Users() {
                   <td>
                     <Link className="btn-edit" to={'/users/' + user.id}>Edit</Link>
                     &nbsp;
+                    {authUser.id !== user.id &&
                     <button onClick={ev => onDelete(user)} className="btn-delete">Delete</button>
+                    }
                   </td>
                 </tr>
               ))}
