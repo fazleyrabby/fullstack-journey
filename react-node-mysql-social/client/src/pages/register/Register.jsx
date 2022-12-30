@@ -13,7 +13,7 @@ const Register = () => {
 
   const [err, setErr] = useState(null)
 
-  const hangleChange = (e) => {
+  const handleChange = (e) => {
     setInputs(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
@@ -39,10 +39,10 @@ const Register = () => {
           <h1>Register</h1>
           <form>
           {err && <small style={{ color:"red" }}>{err}</small>}
-            <input type="text" placeholder="Username" name="username" onChange={hangleChange}/>
-            <input type="email" placeholder="Email" name="email" onChange={hangleChange}/>
-            <input type="text" placeholder="Name" name="name" onChange={hangleChange}/>
-            <input type="password" placeholder="Password" name="password" onChange={hangleChange}/>
+            <input type="text" placeholder="Username" name="username" onChange={handleChange}/>
+            <input type="email" placeholder="Email" name="email" onChange={handleChange}/>
+            <input type="text" placeholder="Name" name="name" onChange={handleChange}/>
+            <input type="password" placeholder="Password" name="password" onChange={handleChange}/>
             <button onClick={handleSubmit}>Register</button>
           </form>
         </div>
