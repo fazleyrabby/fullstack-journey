@@ -10,7 +10,6 @@ const Share = () => {
     const [desc, setDesc] = useState("");
     const { currentUser } = useContext(AuthContext);
 
-    console.log(currentUser)
     return (
         <div className="share">
             <div className="container">
@@ -19,7 +18,7 @@ const Share = () => {
                         <img src={currentUser.profilePic} alt="" />
                         <input
                             type="text"
-                            placeholder={`What's on your mind`}
+                            placeholder={`What's on your mind ${currentUser.name}`}
                             // value={desc}
                         />
                     </div>
