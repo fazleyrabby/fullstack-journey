@@ -7,16 +7,16 @@ const Posts = () => {
     const { isLoading, error, data } = useQuery({
         queryKey: ['posts'],
         queryFn: () =>
-        makeRequest.get("/posts").then(res => {
-            return res.data;
-        })
-      })
+            makeRequest.get("/posts").then(res => {
+                return res.data;
+            })
+    })
 
     return (
         <div className="posts">
-            {data && data.map(post => (
+            {error ? "Something went wrong!" : (isLoading ? "Loading..." :data && data.map(post => (
                 <Post post={post} key={post.id} />
-            ))}
+            )))}
         </div>
     )
 }
