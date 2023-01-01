@@ -18,6 +18,17 @@ const Share = () => {
 
     const queryClient = useQueryClient()
 
+    const upload = async () => {
+        try {
+            const formData = new FormData();
+            formData.append("file", file)
+            const res = await makeRequest.post("upload", formData)
+            return res.data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const mutation = useMutation({
         mutationFn: (newPost) => {
             return makeRequest.post("/posts", newPost)
@@ -29,9 +40,13 @@ const Share = () => {
     })
 
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault()
-        mutation.mutate({ desc })
+        let imgUrl = "";
+        if(file) imgUrl = await upload();
+        mutation.mutate({ desc, img:imgUrl })
+        setDesc("")
+        setFile(null)
     }
     return (
         <div className="share">
@@ -43,7 +58,7 @@ const Share = () => {
                             type="text"
                             placeholder={`What's on your mind ${currentUser.name}`}
                             onChange={e => setDesc(e.target.value)}
-                        // value={desc}
+                            value={desc}
                         />
                     </div>
                     <div className="right">
