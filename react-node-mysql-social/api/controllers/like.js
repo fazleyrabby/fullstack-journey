@@ -17,18 +17,16 @@ export const addLike = (req, res) => {
     jwt.verify(token, "secretkey", (err, user) => {
         if (err) return res.status(403).json("Token Invalid!")
 
-        const q = 'INSERT INTO comments (`desc`,`created_at`,`userid`,`postid`) VALUES (?)'
+        const q = 'INSERT INTO likes (`userid`,`postid`) VALUES (?)'
 
         const values = [
-            req.body.desc,
-            moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
             user.id,
             req.body.postId,
         ]
 
         db.query(q, [values], (err, data) => {
             if (err) return res.status(500).json(err)
-            return res.status(200).json("Comment created!")
+            return res.status(200).json("Post liked!!")
         })
     })
 }
@@ -40,18 +38,11 @@ export const deleteLike = (req, res) => {
     jwt.verify(token, "secretkey", (err, user) => {
         if (err) return res.status(403).json("Token Invalid!")
 
-        const q = 'INSERT INTO comments (`desc`,`created_at`,`userid`,`postid`) VALUES (?)'
+        const q = 'DELETE FROM likes WHERE `userId`= ? AND `postId`= ?'
 
-        const values = [
-            req.body.desc,
-            moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-            user.id,
-            req.body.postId,
-        ]
-
-        db.query(q, [values], (err, data) => {
+        db.query(q, [user.id, req.query.postId], (err, data) => {
             if (err) return res.status(500).json(err)
-            return res.status(200).json("Comment created!")
+            return res.status(200).json("Post disliked!!")
         })
     })
 }
