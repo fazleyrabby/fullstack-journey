@@ -16,7 +16,7 @@ const Share = () => {
     const [desc, setDesc] = useState("");
     const { currentUser } = useContext(AuthContext);
 
-    const queryClient = useQueryClient()
+    
 
     const upload = async () => {
         try {
@@ -28,6 +28,7 @@ const Share = () => {
             console.log(error)
         }
     }
+    const queryClient = useQueryClient()
 
     const mutation = useMutation({
         mutationFn: (newPost) => {
