@@ -24,10 +24,11 @@ const Login = () => {
       await login(inputs)
       navigate("/")
     } catch (error) {
-      setErr(err.response.data)
+      setErr(error.response.data)
     }
     
   }
+
 
   return (
     <div className="login">

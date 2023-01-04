@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import "./register.scss"
 import axios from "axios"
+import { makeRequest } from "../../axios"
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -20,7 +21,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/auth/register", inputs)
+      const response = makeRequest.post("/auth/register", inputs)
     } catch (error) {
       setErr(error.response.data)
     }
