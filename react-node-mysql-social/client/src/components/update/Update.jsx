@@ -11,7 +11,8 @@ const Update = ({setOpenUpdate, user}) => {
         city:"",
         website:"",
     })
-    const upload = async () => {
+
+    const upload = async (file) => {
         try {
             const formData = new FormData();
             formData.append("file", file)
@@ -23,7 +24,7 @@ const Update = ({setOpenUpdate, user}) => {
     }
 
     const handleChange = (e) =>{
-        setTexts((prev) => ({...prev, [e.target.name]: [e.target.value]}))
+        setTexts((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
     const queryClient = useQueryClient()
@@ -38,31 +39,34 @@ const Update = ({setOpenUpdate, user}) => {
         },
     })
 
-
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let coverUrl = user.coverPic;
-        let profileUrl = user.profilePic;
-        // if(file) imgUrl = await upload();
+        let coverUrl;
+        let profileUrl;
 
-        coverUrl = cover && await upload(cover)
-        profileUrl = cover && await upload(profile)
+        coverUrl = cover ? await upload(cover) :user.coverPic
+        profileUrl = profile ? await upload(profile) :user.profilePic
 
         mutation.mutate({ ...texts, coverPic:coverUrl, profilePic: profileUrl })
         setOpenUpdate(false)
+        setCover(null);
+        setProfile(null);
     }
   return (
     <div className="update">
+        <div className="wrapper">
         <form>
-
-        <input type="file" />
-        <input type="file" />
-        <input type="text" name="change" onChange={handleChange}/>
+        <input type="file" onChange={e => setCover(e.target.files[0])}/>
+        <input type="file" onChange={e => setProfile(e.target.files[0])}/>
+        <input type="text" name="name" onChange={handleChange}/>
         <input type="text" name="city" onChange={handleChange}/>
         <input type="text" name="website" onChange={handleChange}/>
         <button onClick={handleSubmit}>Update</button>
         </form>
-        <button onClick={() => setOpenUpdate(false)}>X</button>
+        <button className="close" onClick={() => setOpenUpdate(false)}>
+          close
+        </button>
+        </div>
     </div>
   )
 }

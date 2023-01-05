@@ -11,6 +11,7 @@ const Posts = ({userId}) => {
                 return res.data;
             })
     })
+    console.log(userId)
 
     return (
         <div className="posts">
