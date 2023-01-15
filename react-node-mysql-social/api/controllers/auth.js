@@ -1,6 +1,7 @@
 import { db } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import users from "../routes/users.js";
 
 export const register = (req, res) => {
     //user exists
