@@ -3088,7 +3088,6 @@ export const SparklineAreaData = [
   { x: 3, yval: 8 },
   { x: 4, yval: 5 },
   { x: 5, yval: 10 },
-
 ];
 
 export const lineCustomSeries = [
