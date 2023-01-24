@@ -1,18 +1,25 @@
 import Header from "../components/Header.jsx";
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import axios from "axios";
 
 export default function RegisterPage(){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    console.log(name, email, password)
+    function register(e){
+        e.preventDefault()
+        axios.post('/register',{
+            name, email, password
+        })
+    }
+
     return (
         <div className="mt-4 grow flex items-center justify-around">
             <div className="-mt-64">
                 <h1 className="text-4xl text-center mb-4">Register</h1>
-                <form className="max-w-md mx-auto">
+                <form className="max-w-md mx-auto" onSubmit={register}>
                     <input type="email" placeholder='test@email.com'
                            value={email}
                            onChange={e => setEmail(e.target.value)}/>
