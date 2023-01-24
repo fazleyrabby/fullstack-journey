@@ -1,3 +1,9 @@
+import Header from "../components/Header.jsx";
+
 export default function LoginPage(){
-    return 'login'
+    return (
+        <div>
+            <h1>Login</h1>
+        </div>
+    )
 }
