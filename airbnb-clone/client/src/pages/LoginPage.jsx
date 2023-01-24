@@ -1,4 +1,5 @@
 import Header from "../components/Header.jsx";
+import {Link} from "react-router-dom";
 
 export default function LoginPage(){
     return (
@@ -9,6 +10,9 @@ export default function LoginPage(){
                     <input type="email" placeholder='test@email.com'/>
                     <input type="password" placeholder='Password'/>
                     <button className='primary'>Login</button>
+                    <div className="text-center py-2 text-gray-500">
+                        Don't have an account? <Link className="underline text-black" to={'/register'}>Register now</Link>
+                    </div>
                 </form>
             </div>
         </div>
