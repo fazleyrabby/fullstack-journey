@@ -3,16 +3,21 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
 
-export default function RegisterPage(){
+export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function register(e){
+    function register(e) {
         e.preventDefault()
-        axios.post('/register',{
-            name, email, password
-        })
+        try {
+            axios.post('/register', {
+                name, email, password
+            })
+        } catch (e) {
+            alert('Register failed!')
+        }
+
     }
 
     return (

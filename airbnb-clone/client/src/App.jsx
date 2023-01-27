@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import axios from "axios";
 
 axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.withCredentials = true
 function App() {
   return (
     <Routes>
