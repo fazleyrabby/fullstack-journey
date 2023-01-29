@@ -9,7 +9,7 @@ import axios from "axios";
 import {UserContextProvider} from "./contexts/UserContext.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = 'http://localhost:8800'
 axios.defaults.withCredentials = true
 function App() {
   return (
