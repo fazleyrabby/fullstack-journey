@@ -19,7 +19,9 @@ function App() {
             <Route index element={<IndexPage/>} />
             <Route path="/login" element={<LoginPage/>} />
             <Route path="/register" element={<RegisterPage/>} />
-            <Route path="/account" element={<AccountPage/>} />
+            <Route path="/account/:subpage?" element={<AccountPage/>} />
+            {/*<Route path="/account/bookings" element={<AccountPage/>} />*/}
+            {/*<Route path="/account/places" element={<AccountPage/>} />*/}
         </Route>
     </Routes>
     </UserContextProvider>
