@@ -1,4 +1,5 @@
 const express = require('express')
+const download = require('image-downloader');
 const app = express();
 const cors = require('cors')
 const mongoose = require("mongoose");
@@ -75,6 +76,16 @@ app.post('/login', async (req, res) => {
     }else{
         res.json('not found')
     }
+})
+
+app.post('/upload', async (req, res) => {
+    const {link} = req.body
+    const newName = 'photo'+Date.now() + '.jpg'
+    await download.image({
+        url: link,
+        dest: __dirname +'/uploads/'+ newName,
+    })
+    res.json(newName)
 })
 
 
