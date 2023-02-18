@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('./models/User.js')
+const multer = require('multer')
+const fs = require('fs')
 const {response} = require("express");
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
@@ -79,7 +81,7 @@ app.post('/login', async (req, res) => {
     }
 })
 
-app.post('/upload', async (req, res) => {
+app.post('/upload-by-link', async (req, res) => {
     const {link} = req.body
     const newName = 'photo'+Date.now() + '.jpg'
     await download.image({
@@ -87,6 +89,19 @@ app.post('/upload', async (req, res) => {
         dest: __dirname +'/uploads/'+ newName,
     })
     res.json(newName)
+})
+const photosMiddleware = multer({dest: 'uploads/'});
+app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
+    const uploadedFiles = []
+    for (let i =0; i< req.files.length; i++){
+        const {path, originalname} = req.files[i]
+        const parts = originalname.split('.')
+        const ext = parts[parts.length - 1]
+        const newPath = path +'.'+ ext;
+        fs.renameSync(path, newPath)
+        uploadedFiles.push(newPath)
+    }
+    res.json(uploadedFiles)
 })
 
 
